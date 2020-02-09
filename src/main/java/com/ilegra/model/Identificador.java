@@ -1,14 +1,17 @@
 package com.ilegra.model;
 
 public enum Identificador {
-    VENDEDOR(001),CLIENTE(002),VENDA(003);
+    VENDEDOR("001"),
+    CLIENTE("002"),
+    VENDA("003");
 
-    public int id;
+    private String id;
 
-    Identificador(int id) {
+    Identificador(String id) {
+        this.id = id;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 }

@@ -1,5 +1,4 @@
 package com.ilegra.model;
-import com.ilegra.model.Identificador;
 
 public class Cliente {
     private Identificador identificador;
