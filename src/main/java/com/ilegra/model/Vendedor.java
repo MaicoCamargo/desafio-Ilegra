@@ -1,24 +1,20 @@
 package com.ilegra.model;
 
 public class Vendedor {
-    private int codigo;
+    private Identificador identificador;
     private String nome;
     private String cpf;
     private float salario;
 
-    public Vendedor(int codigo, String nome, String cpf, float salario) {
-        this.codigo = codigo;
+    public Vendedor(String nome, String cpf, float salario) {
+        this.identificador = Identificador.VENDEDOR;
         this.nome = nome;
         this.cpf = cpf;
         this.salario = salario;
     }
 
-    public int getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public Identificador getIdentificador() {
+        return identificador;
     }
 
     public String getNome() {
@@ -43,5 +39,15 @@ public class Vendedor {
 
     public void setSalario(float salario) {
         this.salario = salario;
+    }
+
+    @Override
+    public String toString() {
+        return "Vendedor{" +
+                "identificador=" + identificador +
+                ", nome='" + nome + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", salario=" + salario +
+                '}';
     }
 }

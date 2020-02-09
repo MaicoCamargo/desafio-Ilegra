@@ -1,23 +1,21 @@
 package com.ilegra.model;
 
 public class Venda {
-    private int identificador;
+
+    private Identificador identificador;
     private int id;
     private Item item;
     private Vendedor vendedor;
 
-    public Venda(int identificador, int id, Vendedor vendedor) {
-        this.identificador = identificador;
+    public Venda(int id, Item item, Vendedor vendedor) {
+        this.identificador = Identificador.VENDA;
         this.id = id;
+        this.item = item;
         this.vendedor = vendedor;
     }
 
-    public int getIdentificador() {
+    public Identificador getIdentificador() {
         return identificador;
-    }
-
-    public void setIdentificador(int identificador) {
-        this.identificador = identificador;
     }
 
     public int getId() {
@@ -28,11 +26,29 @@ public class Venda {
         this.id = id;
     }
 
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
+    }
+
     public Vendedor getVendedor() {
         return vendedor;
     }
 
     public void setVendedor(Vendedor vendedor) {
         this.vendedor = vendedor;
+    }
+
+    @Override
+    public String toString() {
+        return "Venda{" +
+                "identificador=" + identificador +
+                ", id=" + id +
+                ", item=" + item +
+                ", vendedor=" + vendedor +
+                '}';
     }
 }
