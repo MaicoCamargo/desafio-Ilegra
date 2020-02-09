@@ -1,16 +1,19 @@
 package com.ilegra.model;
 
+import java.util.List;
+import java.util.Set;
+
 public class Venda {
 
     private Identificador identificador;
     private int id;
-    private Item item;
+    private Set<Item> itens;
     private Vendedor vendedor;
 
-    public Venda(int id, Item item, Vendedor vendedor) {
+    public Venda(int id, Set<Item> itens, Vendedor vendedor) {
         this.identificador = Identificador.VENDA;
         this.id = id;
-        this.item = item;
+        this.itens = itens;
         this.vendedor = vendedor;
     }
 
@@ -26,14 +29,6 @@ public class Venda {
         this.id = id;
     }
 
-    public Item getItem() {
-        return item;
-    }
-
-    public void setItem(Item item) {
-        this.item = item;
-    }
-
     public Vendedor getVendedor() {
         return vendedor;
     }
@@ -47,7 +42,7 @@ public class Venda {
         return "Venda{" +
                 "identificador=" + identificador +
                 ", id=" + id +
-                ", item=" + item +
+                ", itens=" + itens +
                 ", vendedor=" + vendedor +
                 '}';
     }

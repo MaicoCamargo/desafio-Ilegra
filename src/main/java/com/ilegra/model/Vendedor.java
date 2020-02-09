@@ -6,6 +6,9 @@ public class Vendedor {
     private String nome;
     private float salario;
 
+    public Vendedor() {
+    }
+
     public Vendedor(String cpf, String nome, float salario) {
         this.identificador = Identificador.VENDEDOR;
         this.nome = nome;

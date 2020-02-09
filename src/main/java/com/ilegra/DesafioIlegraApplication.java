@@ -1,19 +1,26 @@
 package com.ilegra;
 
 import com.ilegra.controller.ReadFile;
-import com.ilegra.props.Props;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 import java.io.IOException;
 
 @SpringBootApplication
 public class DesafioIlegraApplication {
 
-	public static void main(String[] args) throws IOException {
-		//SpringApplication.run(DesafioIlegraApplication.class, args);
-		new ReadFile().read();
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(DesafioIlegraApplication.class, args);
+    }
+
+    @Bean
+    public CommandLineRunner commandLineRunner() {
+        return args -> {
+            new ReadFile().read();
+        };
+    }
 
 }
 /*
@@ -65,7 +72,4 @@ public class DesafioIlegraApplication {
 		Requisitos técnicos
 			• O sistema deve rodar continuamente e capturar novos arquivos assim que eles sejam inseridos no diretório padrão.
 			• Você tem total liberdade para escolher qualquer biblioteca externa se achar necessário.
-
-
-
 */

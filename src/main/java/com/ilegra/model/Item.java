@@ -35,4 +35,13 @@ public class Item {
     public void setPreco(float preco) {
         this.preco = preco;
     }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id=" + id +
+                ", quantidade=" + quantidade +
+                ", preco=" + preco +
+                '}';
+    }
 }
