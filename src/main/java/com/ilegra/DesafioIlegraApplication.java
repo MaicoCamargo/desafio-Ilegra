@@ -1,13 +1,18 @@
 package com.ilegra;
 
+import com.ilegra.controller.ReadFile;
+import com.ilegra.props.Props;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.io.IOException;
 
 @SpringBootApplication
 public class DesafioIlegraApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(DesafioIlegraApplication.class, args);
+	public static void main(String[] args) throws IOException {
+		//SpringApplication.run(DesafioIlegraApplication.class, args);
+		new ReadFile().read();
 	}
 
 }

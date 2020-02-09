@@ -2,11 +2,11 @@ package com.ilegra.model;
 
 public class Vendedor {
     private Identificador identificador;
-    private String nome;
     private String cpf;
+    private String nome;
     private float salario;
 
-    public Vendedor(String nome, String cpf, float salario) {
+    public Vendedor(String cpf, String nome, float salario) {
         this.identificador = Identificador.VENDEDOR;
         this.nome = nome;
         this.cpf = cpf;

@@ -2,11 +2,11 @@ package com.ilegra.model;
 
 public class Cliente {
     private Identificador identificador;
-    private String nome;
     private String cnpj;
+    private String nome;
     private String BusinessArea;
 
-    public Cliente(String nome, String cnpj, String businessArea) {
+    public Cliente(String cnpj, String nome, String businessArea) {
         this.identificador = Identificador.CLIENTE;
         this.nome = nome;
         this.cnpj = cnpj;
