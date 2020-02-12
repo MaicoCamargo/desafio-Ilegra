@@ -1,6 +1,5 @@
 package com.ilegra.model;
 
-import java.util.List;
 import java.util.Set;
 
 public class Venda {
@@ -10,11 +9,28 @@ public class Venda {
     private Set<Item> itens;
     private Vendedor vendedor;
 
+    public Venda() {
+        this.identificador = Identificador.VENDA;
+
+    }
+
     public Venda(int id, Set<Item> itens, Vendedor vendedor) {
         this.identificador = Identificador.VENDA;
         this.id = id;
         this.itens = itens;
         this.vendedor = vendedor;
+    }
+
+    public void setIdentificador(Identificador identificador) {
+        this.identificador = identificador;
+    }
+
+    public Set<Item> getItens() {
+        return itens;
+    }
+
+    public void setItens(Set<Item> itens) {
+        this.itens = itens;
     }
 
     public Identificador getIdentificador() {
