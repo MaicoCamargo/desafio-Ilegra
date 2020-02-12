@@ -61,12 +61,12 @@ public class RelatorioService {
         arquivo = new FileWriter(new File(Props.DATA_OUT + "teste" + new Date()));
         PrintWriter gravarArq = new PrintWriter(arquivo);
 
-        gravarArq.printf("#---- Relatório - Desafio Ilegra | Maico Camargo ----#\n");
+        gravarArq.printf("#-- Relatório venda- Desafio Ilegra | Maico Camargo --#\n");
         gravarArq.printf("          Numero de vendedores: "+ relatorio.calcularQuantidadeVendedores(relatorio.getVendedores())+"\n");
         gravarArq.printf("          Numero de clientes: "+ relatorio.calcularQuantidadeClientes(relatorio.getClientes())+"\n");
         gravarArq.printf("          venda mais cara: "+ "[id:" +relatorio.descobrirVendaMaisCara(relatorio.getVendas()).getId()+"]"+"\n");
         gravarArq.printf("          Pior vendedor: "+ relatorio.calcularPiorVendedor(relatorio.getVendas()).getNome()+"\n");
-        gravarArq.printf("#------------------------END-------------------------#");
+        gravarArq.printf("#------------------------END--------------------------#");
         arquivo.close();
     }
 }
