@@ -29,3 +29,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+#arquivos criados para teste
+data/out
