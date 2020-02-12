@@ -1,12 +1,11 @@
 package com.ilegra;
 
 import com.ilegra.controller.ReadFile;
+import com.ilegra.service.RelatorioService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
-import java.io.IOException;
 
 @SpringBootApplication
 public class DesafioIlegraApplication {
@@ -18,7 +17,7 @@ public class DesafioIlegraApplication {
     @Bean
     public CommandLineRunner commandLineRunner() {
         return args -> {
-            new ReadFile().read();
+            new RelatorioService().gerarRelatorio();
         };
     }
 
