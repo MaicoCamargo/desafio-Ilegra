@@ -10,8 +10,8 @@ import java.util.Set;
 
 public class RelatorioService {
 
-    public Relatorio readFile() throws IOException {
-        File file = new File(Props.DATA_IN + "infos.txt");
+    public Relatorio readFile(String path) throws IOException {
+        File file = new File(path);
         BufferedReader br = new BufferedReader(new FileReader(file));
         String linha;
         ItemService itemService = new ItemService();
@@ -49,24 +49,31 @@ public class RelatorioService {
         return relatorio;
     }
 
-    public void gerarRelatorio() throws IOException {
-        Relatorio relatorio = readFile();
-        System.out.println("Numero de vendedores: "+ relatorio.calcularQuantidadeVendedores(relatorio.getVendedores()));
-        System.out.println("Numero de clientes: "+ relatorio.calcularQuantidadeClientes(relatorio.getClientes()));
-        System.out.println("Venda mais cara: "+ "[id:" +relatorio.descobrirVendaMaisCara(relatorio.getVendas()).getId()+"]");
-        System.out.println("Pior vendedor: "+ relatorio.calcularPiorVendedor(relatorio.getVendas()).getNome());
+    public void gerarRelatorio(String pathArquivo, String operacao,String nomeRelatorio) {
+        try {
+            Relatorio relatorio = readFile(pathArquivo);
+            System.out.println("Numero de vendedores: "+ relatorio.calcularQuantidadeVendedores(relatorio.getVendedores()));
+            System.out.println("Numero de clientes: "+ relatorio.calcularQuantidadeClientes(relatorio.getClientes()));
+            System.out.println("Venda mais cara: "+ "[id:" +relatorio.descobrirVendaMaisCara(relatorio.getVendas()).getId()+"]");
+            System.out.println("Pior vendedor: "+ relatorio.calcularPiorVendedor(relatorio.getVendas()).getNome());
 
-        FileWriter arquivo;
-        // todo receber por parametro o nome do relatório
-        arquivo = new FileWriter(new File(Props.DATA_OUT + "teste" + new Date()));
-        PrintWriter gravarArq = new PrintWriter(arquivo);
+            FileWriter arquivo;
+            // todo receber por parametro o nome do relatório
+            arquivo = new FileWriter(new File(Props.DATA_OUT + nomeRelatorio + new Date()));
+            PrintWriter gravarArq = new PrintWriter(arquivo);
 
-        gravarArq.printf("#-- Relatório venda- Desafio Ilegra | Maico Camargo --#\n");
-        gravarArq.printf("          Numero de vendedores: "+ relatorio.calcularQuantidadeVendedores(relatorio.getVendedores())+"\n");
-        gravarArq.printf("          Numero de clientes: "+ relatorio.calcularQuantidadeClientes(relatorio.getClientes())+"\n");
-        gravarArq.printf("          venda mais cara: "+ "[id:" +relatorio.descobrirVendaMaisCara(relatorio.getVendas()).getId()+"]"+"\n");
-        gravarArq.printf("          Pior vendedor: "+ relatorio.calcularPiorVendedor(relatorio.getVendas()).getNome()+"\n");
-        gravarArq.printf("#------------------------END--------------------------#");
-        arquivo.close();
+            gravarArq.printf("#-- Relatório venda - Desafio Ilegra | Maico Camargo --#\n");
+            gravarArq.printf("    --Dir:"+pathArquivo+"\n");
+            gravarArq.printf("    --Arquivo:"+operacao+"\n");
+            gravarArq.printf("          Numero de vendedores: "+ relatorio.calcularQuantidadeVendedores(relatorio.getVendedores())+"\n");
+            gravarArq.printf("          Numero de clientes: "+ relatorio.calcularQuantidadeClientes(relatorio.getClientes())+"\n");
+            gravarArq.printf("          venda mais cara: "+ "[id:" +relatorio.descobrirVendaMaisCara(relatorio.getVendas()).getId()+"]"+"\n");
+            gravarArq.printf("          Pior vendedor: "+ relatorio.calcularPiorVendedor(relatorio.getVendas()).getNome()+"\n");
+            gravarArq.printf("#------------------------END--------------------------#");
+            arquivo.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }
