@@ -7,6 +7,7 @@ A descrição do desafio encontrasse, na raiz do projeto em um PDF chamado Desaf
     - para executar o projeto, executar a classe DesafioIlegraApplicatio.java que encontrasse em: src/main/java/com/ilegra/DesafioIlegraApplication.java, 
        ou gerar um build da aplicação que a mesma foi configurada para gerar um .war<br>
     - no console da aplicação cada vez que um arquivo for criado, modificado ou deletado do diretório data/in, aparecerá uma mensagem informando, quando for criado ou modificado, a aplicação vai gerar um relatório<br>
+    - a aplicação verifica se ocorreu alguma alteração no diretório a cada 10 segundos<br>
     - existe um docker file dentro aplicação mas o mesmo gera imagem, mas não consegui gerar um container com a mesma pra rodar em um ambiente na nuvem por exemplo, conheco o conceito do docker, container, orquestração de container mas não trabalhei a fundo com isso.<br>
 at.te Maico Camargo.
 
