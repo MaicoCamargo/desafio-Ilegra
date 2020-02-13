@@ -10,8 +10,14 @@ import java.util.Set;
 
 public class RelatorioService {
 
-    public Relatorio readFile() throws IOException {
-        File file = new File(Props.DATA_IN + "infos.txt");
+    /**
+     * le o arquivo e transforma as informações em objetos
+     * @param path - caminho e nome do arquivo
+     * @return - objeto relatório com as informações do arquivo
+     * @throws IOException - exceção caso ocorra um erro ao ler o arquivo
+     */
+    public Relatorio readFile(String path) throws IOException {
+        File file = new File(path);
         BufferedReader br = new BufferedReader(new FileReader(file));
         String linha;
         ItemService itemService = new ItemService();
@@ -49,24 +55,40 @@ public class RelatorioService {
         return relatorio;
     }
 
-    public void gerarRelatorio() throws IOException {
-        Relatorio relatorio = readFile();
-        System.out.println("Numero de vendedores: "+ relatorio.calcularQuantidadeVendedores(relatorio.getVendedores()));
-        System.out.println("Numero de clientes: "+ relatorio.calcularQuantidadeClientes(relatorio.getClientes()));
-        System.out.println("Venda mais cara: "+ "[id:" +relatorio.descobrirVendaMaisCara(relatorio.getVendas()).getId()+"]");
-        System.out.println("Pior vendedor: "+ relatorio.calcularPiorVendedor(relatorio.getVendas()).getNome());
+    /*
+    * escreve os dados do relatório em um arquivo e salva no diretório data/out
+    * */
 
-        FileWriter arquivo;
-        // todo receber por parametro o nome do relatório
-        arquivo = new FileWriter(new File(Props.DATA_OUT + "teste" + new Date()));
-        PrintWriter gravarArq = new PrintWriter(arquivo);
+    /**
+     *
+     * @param pathArquivo - caminho do arquivo e nome que deve ser lido para gerar o relatório
+     * @param operacao - o que o arquivo foi criado ou modificado
+     * @param nomeRelatorio - nome que o relatorio criado deve ter
+     */
+    public void gerarRelatorio(String pathArquivo, String operacao,String nomeRelatorio) {
+        try {
+            Relatorio relatorio = readFile(pathArquivo);
+            System.out.println("Numero de vendedores: "+ relatorio.calcularQuantidadeVendedores(relatorio.getVendedores()));
+            System.out.println("Numero de clientes: "+ relatorio.calcularQuantidadeClientes(relatorio.getClientes()));
+            System.out.println("Venda mais cara: "+ "[id:" +relatorio.descobrirVendaMaisCara(relatorio.getVendas()).getId()+"]");
+            System.out.println("Pior vendedor: "+ relatorio.calcularPiorVendedor(relatorio.getVendas()).getNome());
 
-        gravarArq.printf("#-- Relatório venda- Desafio Ilegra | Maico Camargo --#\n");
-        gravarArq.printf("          Numero de vendedores: "+ relatorio.calcularQuantidadeVendedores(relatorio.getVendedores())+"\n");
-        gravarArq.printf("          Numero de clientes: "+ relatorio.calcularQuantidadeClientes(relatorio.getClientes())+"\n");
-        gravarArq.printf("          venda mais cara: "+ "[id:" +relatorio.descobrirVendaMaisCara(relatorio.getVendas()).getId()+"]"+"\n");
-        gravarArq.printf("          Pior vendedor: "+ relatorio.calcularPiorVendedor(relatorio.getVendas()).getNome()+"\n");
-        gravarArq.printf("#------------------------END--------------------------#");
-        arquivo.close();
+            FileWriter arquivo;
+            arquivo = new FileWriter(new File(Props.DATA_OUT + nomeRelatorio + new Date()));
+            PrintWriter gravarArq = new PrintWriter(arquivo);
+
+            gravarArq.printf("#-- Relatório venda - Desafio Ilegra | Maico Camargo --#\n");
+            gravarArq.printf("    --Dir:"+pathArquivo+"\n");
+            gravarArq.printf("    --Arquivo:"+operacao+"\n");
+            gravarArq.printf("          Numero de vendedores: "+ relatorio.calcularQuantidadeVendedores(relatorio.getVendedores())+"\n");
+            gravarArq.printf("          Numero de clientes: "+ relatorio.calcularQuantidadeClientes(relatorio.getClientes())+"\n");
+            gravarArq.printf("          venda mais cara: "+ "[id:" +relatorio.descobrirVendaMaisCara(relatorio.getVendas()).getId()+"]"+"\n");
+            gravarArq.printf("          Pior vendedor: "+ relatorio.calcularPiorVendedor(relatorio.getVendas()).getNome()+"\n");
+            gravarArq.printf("#------------------------END--------------------------#");
+            arquivo.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

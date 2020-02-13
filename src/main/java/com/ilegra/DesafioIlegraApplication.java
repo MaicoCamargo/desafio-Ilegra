@@ -1,11 +1,18 @@
 package com.ilegra;
 
-import com.ilegra.controller.ReadFile;
+import com.ilegra.props.Props;
 import com.ilegra.service.RelatorioService;
+import org.apache.commons.io.monitor.FileAlterationListener;
+import org.apache.commons.io.monitor.FileAlterationListenerAdaptor;
+import org.apache.commons.io.monitor.FileAlterationMonitor;
+import org.apache.commons.io.monitor.FileAlterationObserver;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
+import java.io.File;
+import java.util.Date;
 
 @SpringBootApplication
 public class DesafioIlegraApplication {
@@ -17,7 +24,36 @@ public class DesafioIlegraApplication {
     @Bean
     public CommandLineRunner commandLineRunner() {
         return args -> {
-            new RelatorioService().gerarRelatorio();
+            /*
+                monitorando o diretório o diretório a cada 10 seg.
+            *   - um evento é gerado toda vez que eu arquivo for criado, removido ou deletado.
+            *   - quando for criado ou modificado a aplicacação gera um relatório do arquivo e salva no direorio data/out
+            * */
+            FileAlterationObserver observer = new FileAlterationObserver(Props.DATA_IN);
+            FileAlterationMonitor monitor = new FileAlterationMonitor(Long.parseLong("10000"));
+            FileAlterationListener listener = new FileAlterationListenerAdaptor() {
+                @Override
+                public void onFileCreate(File file) {
+                    System.out.println("arquivo criado");
+                    new RelatorioService().gerarRelatorio(String.valueOf(file), "criado", "Relatorio_"+ new Date());
+
+                }
+
+                @Override
+                public void onFileDelete(File file) {
+                    // code for processing deletion event
+                    System.out.println("arquivo deletado: "+ file);
+                }
+
+                @Override
+                public void onFileChange(File file) {
+                    System.out.println("arquivo modificado");
+                    new RelatorioService().gerarRelatorio(String.valueOf(file), "modificado", "Relatorio_"+ new Date());
+                }
+            };
+            observer.addListener(listener);
+            monitor.addObserver(observer);
+            monitor.start();
         };
     }
 
