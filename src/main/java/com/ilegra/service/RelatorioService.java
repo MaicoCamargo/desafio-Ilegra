@@ -10,6 +10,12 @@ import java.util.Set;
 
 public class RelatorioService {
 
+    /**
+     * le o arquivo e transforma as informações em objetos
+     * @param path - caminho e nome do arquivo
+     * @return - objeto relatório com as informações do arquivo
+     * @throws IOException - exceção caso ocorra um erro ao ler o arquivo
+     */
     public Relatorio readFile(String path) throws IOException {
         File file = new File(path);
         BufferedReader br = new BufferedReader(new FileReader(file));
@@ -49,6 +55,16 @@ public class RelatorioService {
         return relatorio;
     }
 
+    /*
+    * escreve os dados do relatório em um arquivo e salva no diretório data/out
+    * */
+
+    /**
+     *
+     * @param pathArquivo - caminho do arquivo e nome que deve ser lido para gerar o relatório
+     * @param operacao - o que o arquivo foi criado ou modificado
+     * @param nomeRelatorio - nome que o relatorio criado deve ter
+     */
     public void gerarRelatorio(String pathArquivo, String operacao,String nomeRelatorio) {
         try {
             Relatorio relatorio = readFile(pathArquivo);
@@ -58,7 +74,6 @@ public class RelatorioService {
             System.out.println("Pior vendedor: "+ relatorio.calcularPiorVendedor(relatorio.getVendas()).getNome());
 
             FileWriter arquivo;
-            // todo receber por parametro o nome do relatório
             arquivo = new FileWriter(new File(Props.DATA_OUT + nomeRelatorio + new Date()));
             PrintWriter gravarArq = new PrintWriter(arquivo);
 

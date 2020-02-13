@@ -24,6 +24,11 @@ public class DesafioIlegraApplication {
     @Bean
     public CommandLineRunner commandLineRunner() {
         return args -> {
+            /*
+                monitorando o diretório o diretório a cada 10 seg.
+            *   - um evento é gerado toda vez que eu arquivo for criado, removido ou deletado.
+            *   - quando for criado ou modificado a aplicacação gera um relatório do arquivo e salva no direorio data/out
+            * */
             FileAlterationObserver observer = new FileAlterationObserver(Props.DATA_IN);
             FileAlterationMonitor monitor = new FileAlterationMonitor(Long.parseLong("10000"));
             FileAlterationListener listener = new FileAlterationListenerAdaptor() {

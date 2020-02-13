@@ -2,9 +2,7 @@ package com.ilegra.service;
 
 import com.ilegra.model.Item;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class ItemService {

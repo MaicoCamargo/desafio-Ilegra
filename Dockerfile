@@ -14,7 +14,7 @@ EXPOSE 8080
 COPY target/desafio-ilegra-*.war /app.war
 
 # specify default command
-CMD ["/usr/bin/java", "-jar", "-Dspring.profiles.active=test", "/desafio-ilegra.war"]
+CMD ["/usr/bin/java", "-war", "-Dspring.profiles.active=test", "/desafio-ilegra.war"]
 
 # Run the jar file
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/desafio-ilegra.jar"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-war","/desafio-ilegra.war"]
